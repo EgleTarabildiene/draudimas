@@ -1,29 +1,44 @@
 <app-error [isError]="isError" [text]="errorText"></app-error>
 <div class="card mt-3">
-    <div class="card-header">Pridėti naują savininka</div>
+    <div class="card-header">Pridėti naują automobilio draudimo savininką</div>
     <div class="card-body">
         <form (ngSubmit)="ownerSubmit(f)" #f="ngForm">
             <div class="mb-3">
-                <label for="" class="form-label">Vardas</label>
-                <input type="text" class="form-control" name="name" value="" ngModel>
+                <label for="" class="form-label">Vardas:</label>
+                <input type="text" class="form-control" [class.is-invalid]="!inputName.valid && inputName.touched" name="name" value="" ngModel required minlength="2" maxlength="45" pattern="[a-zA-Z ]*" #inputName="ngModel">
+                <div class="helper-block " *ngIf="!inputName.valid && inputName.touched">
+                    Vardas yra privalomas, turi būti 2-45 simbolių ilgio, galima įvesti tik raides ir tarpą
+                </div>
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Pavarde</label>
-                <input type="text" class="form-control" name="surname" value="" ngModel>
+                <label for="" class="form-label">Pavardė:</label>
+                <input type="text" class="form-control" [class.is-invalid]="!inputSurname.valid && inputSurname.touched" name="surname" value="" ngModel required minlength="2" maxlength="45" pattern="[a-zA-Z ]*" #inputSurname="ngModel">
+                <div class="helper-block " *ngIf="!inputSurname.valid && inputSurname.touched" [@errorBlock]>
+                    Pavardė yra privaloma, turi būti 2-45 simbolių ilgio, galima įvesti tik raides ir tarpą
+                </div>
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Telefono numeris</label>
-                <input type="text" class="form-control" name="phone" value="" ngModel>
+                <label for="" class="form-label">Telefono numeris:</label>
+                <input type="text" class="form-control" [class.is-invalid]="!inputPhone.valid && inputPhone.touched" name="phone" value="" ngModel required minlength="10" maxlength="12" pattern="^\+370[6-9][0-9]{7}$" placeholder="+37000000000" #inputPhone="ngModel">
+                <div class="helper-block " *ngIf="!inputPhone.valid && inputPhone.touched">
+                    Telefono numeris yra privalomas
+                </div>
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Elektroninio pasto adresas</label>
-                <input type="text" class="form-control" name="email" value="" ngModel>
+                <label for="" class="form-label">Elektroninio pašto adresas:</label>
+                <input type="text" class="form-control" name="email" value="" [class.is-invalid]="!inputEmail.valid && inputEmail.touched" ngModel required email #inputEmail="ngModel">
+                <div class="helper-block " *ngIf="!inputEmail.valid && inputEmail.touched" [@errorBlock]>
+                    Elektroninis paštas yra privalomas, turi būti pateiktas validus adresas
+                </div>
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Adresas</label>
-                <input type="text" class="form-control" name="address" value="" ngModel>
+                <label for="" class="form-label">Adresas:</label>
+                <input type="text" class="form-control" name="address" value="" ngModel required minlength="2" maxlength="45" #inputAddress="ngModel">
+                <div class="helper-block " *ngIf="!inputAddress.valid && inputAddress.touched">
+                    Adresas yra privalomas
+                </div>
             </div>
-            <button class="btn btn-success" type="submit">Pridėti</button>
+            <button class="btn btn-success" [disabled]="!f.valid" type="submit">Pridėti</button>
         </form>
 
     </div>
