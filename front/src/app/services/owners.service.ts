@@ -23,4 +23,11 @@ export class OwnersService {
     return this.http.post('http://localhost:4999/owners/',owner);
   }
 
+  public updateOwner(owner:Owner){
+    return this.http.put('http://localhost:4999/owners/',owner);
+  }
+  public deleteOwner(id:number){
+    return this.http.delete('http://localhost:4999/owners/'+id);
+  }
+
 }

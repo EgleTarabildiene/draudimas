@@ -14,10 +14,23 @@ import { RouterLink } from '@angular/router';
 export class TableOwnersComponent {
   public owners:Owner[]=[];
 
-constructor (private ownersServise:OwnersService){
-  ownersServise.getOwners().subscribe((data)=>{
+
+  private loadOwners(){
+   this.ownersService.getOwners().subscribe((data)=>{
    this.owners=data;
+    });
+  }
+
+constructor (private ownersService:OwnersService){
+ this.loadOwners();
    
-  });
+  
 }
+
+public deleteOwner(id:number){
+    this.ownersService.deleteOwner(id).subscribe((data)=>{
+      this.loadOwners();
+    });
+
+  }
 }

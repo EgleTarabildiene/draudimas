@@ -24,14 +24,21 @@ class OwnersController {
             console.log(req.params.id);
             const sql = "SELECT * FROM owners Where id=?";
             const [result] = yield connect_1.pool.query(sql, [req.params.id]);
-            res.json(result[0]);
+            if (result.length == 0) {
+                res.status(404).json({
+                    'text': 'Pateiktas įrašas nerastas'
+                });
+            }
+            else {
+                res.json(result[0]);
+            }
         });
     }
     static insert(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const sql = "INSERT INTO owners (name, surname, phone, email, address) VALUES ( ?, ?, ?, ?, ? )";
             yield connect_1.pool.query(sql, [req.body.name, req.body.surname, req.body.phone, req.body.email, req.body.address]);
-            res.json({
+            res.status(201).json({
                 "success": true
             });
         });
@@ -39,16 +46,23 @@ class OwnersController {
     static update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const sql = "UPDATE owners SET name=?, surname=?, phone=?, email=?, address=?  WHERE id=?";
-            yield connect_1.pool.query(sql, [req.body.name, req.body.surname, , req.body.phone, req.body.email, req.body.address, req.body.id]);
-            res.json({
-                "success": true
-            });
+            try {
+                yield connect_1.pool.query(sql, [req.body.name, req.body.surname, req.body.phone, req.body.email, req.body.address, req.body.id]);
+                res.json({
+                    "success": true
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    'text': 'Įvyko atnaujinimo klaida'
+                });
+            }
         });
     }
     static delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const sql = "DELETE FROM owners WHERE id=?";
-            yield connect_1.pool.query(sql, [req.body.id]);
+            yield connect_1.pool.query(sql, [req.params.id]);
             res.json({
                 "success": true
             });

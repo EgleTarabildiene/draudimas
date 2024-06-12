@@ -21,7 +21,8 @@
                     <td>{{ owner.email }}</td>
                     <td>{{ owner.address}}</td>
                     <td>
-                        <a class="btn btn-success" [routerLink]="['/owners', owner.id]">Redaguoti</a>
+                        <a class="btn btn-success" [routerLink]="['/owners', owner.id]">Redaguoti</a>&nbsp;&nbsp;
+                        <button class="btn btn-danger" (click)="deleteOwner(owner.id!)">Ištrinti</button>
                     </td>
 
                 </tr>

@@ -1,7 +1,9 @@
+<app-error [isError]="isError" [text]="errorText"></app-error>
+
 <div class="card mt-3">
     <div class="card-header">Atnaujinti duomenis</div>
     <div class="card-body">
-        <form #f="ngForm">
+        <form (ngSubmit)="ownerSubmit(f)" #f="ngForm">
             <div class="mb-3">
                 <label for="" class="form-label">Vardas</label>
                 <input type="text" class="form-control" name="name" value="" ngModel [(ngModel)]="name">

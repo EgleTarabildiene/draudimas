@@ -7,6 +7,6 @@ ownersRouter.get("/", OwnersController.getAll);
 ownersRouter.get("/:id", OwnersController.getOwner);
 ownersRouter.post("/", OwnersController.insert);
 ownersRouter.put("/", OwnersController.update);
-ownersRouter.delete("/", OwnersController.delete);
+ownersRouter.delete("/:id", OwnersController.delete);
 
 export {ownersRouter};
