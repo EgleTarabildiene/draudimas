@@ -9,6 +9,13 @@ export class OwnersController{
         res.json(result);
     }
 
+    static async getOwner( req:any, res:any){
+          console.log(req.params.id);
+        const sql="SELECT * FROM owners Where id=?";
+        const [result]=await pool.query<Owner[]>(sql,[req.params.id]);
+        res.json(result[0]);
+    }
+
     static async insert(req:any, res:any){
         const sql="INSERT INTO owners (name, surname, phone, email, address) VALUES ( ?, ?, ?, ?, ? )";
         await pool.query(sql, [req.body.name, req.body.surname, req.body.phone, req.body.email, req.body.address]);

@@ -1,5 +1,5 @@
 import express from 'express';
-import { SkaiciuokleController } from '../conrollers/skaiciuokle.controller'; 
+import { SkaiciuokleController } from '../controllers/skaiciuokle.controller'; 
 const skaiciuokleRouter=express.Router();
 
 skaiciuokleRouter.post('/skaiciuoti', SkaiciuokleController.apskaiciuoti);

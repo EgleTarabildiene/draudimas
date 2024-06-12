@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-header">Draudimo savininku sąrašas</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nr</th>
+                    <th>Vardas</th>
+                    <th>Pavarde</th>
+                    <th>Telefono numeris</th>
+                    <th>Elektroninis pastas</th>
+                    <th>Adresas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let owner of owners; let i=index;">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ owner.name }}</td>
+                    <td>{{ owner.surname }}</td>
+                    <td>{{ owner.phone }}</td>
+                    <td>{{ owner.email }}</td>
+                    <td>{{ owner.address}}</td>
+                    <td>
+                        <a class="btn btn-success" [routerLink]="['/owners', owner.id]">Redaguoti</a>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
