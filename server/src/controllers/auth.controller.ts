@@ -13,7 +13,16 @@ export class AuthController{
 
         password=await bcrypt.hash(password, 12);
 
-        const sql="INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+             let sql="SELECT * FROM users WHERE email LIKE ?";
+        const [result]=await pool.query<User[]>(sql,[email]);
+        if  (result.length!=0){
+            return res.status(400).json({
+                'text':"Vartotojas su tokiu el. pašto adresu yra registruotas"
+            })
+        }
+
+
+        sql="INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
         await pool.query(sql, [name, email, password]);
 
         res.json({"status":"ok"});
@@ -55,7 +64,8 @@ export class AuthController{
         res.json({
             'name':user.name,
             'email':user.email,
-            'token':token
+            'token':token,
+            'type':user.type
         });
 
     }

@@ -8,9 +8,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" routerLink="/owners/list">Savininku sąrašas</a>
+                    <a class="nav-link " *ngIf="authService.canViewData()" aria-current="page" routerLink="/owners/list">Savininku sąrašas</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="authService.canEdit()">
                     <a class="nav-link " aria-current="page" routerLink="/owners/new">Pridėti naują savininka</a>
                 </li>
                 <li class="nav-item">

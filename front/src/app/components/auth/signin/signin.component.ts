@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,15 +13,18 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class SigninComponent {
 
-  constructor (private authService:AuthService){
+  constructor (private authService:AuthService, private errorService:ErrorService){
 
   }
 
   public onRegister(f:NgForm){
-    this.authService.registerUser(f.form.value).subscribe({
+     this.authService.registerUser(f.form.value).subscribe({
       next:(data)=>{
         console.log(data);
 
+      },
+      error:(error)=>{
+        this.errorService.errorEmitter.emit(error.error.text);
       }
     })
   }

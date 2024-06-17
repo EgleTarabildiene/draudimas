@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ErrorComponent } from '../../helper/error/error.component';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor (private authService:AuthService, private router:Router){
+  constructor (private authService:AuthService, private router:Router, private errorService:ErrorService){
 
   }
 
@@ -23,7 +25,12 @@ export class LoginComponent {
       next: (data)=>{ 
         console.log(data);
         this.router.navigate(['/']);
+      },
+  error: (error)=>{
+        this.errorService.errorEmitter.emit(error.error.text);
+
       }
+
      })
   }
 }

@@ -23,7 +23,14 @@ class AuthController {
             const email = req.body.email;
             let password = req.body.password;
             password = yield bcrypt_1.default.hash(password, 12);
-            const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+            let sql = "SELECT * FROM users WHERE email LIKE ?";
+            const [result] = yield connect_1.pool.query(sql, [email]);
+            if (result.length != 0) {
+                return res.status(400).json({
+                    'text': "Vartotojas su tokiu el. pašto adresu yra registruotas"
+                });
+            }
+            sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
             yield connect_1.pool.query(sql, [name, email, password]);
             res.json({ "status": "ok" });
         });
@@ -54,7 +61,8 @@ class AuthController {
             res.json({
                 'name': user.name,
                 'email': user.email,
-                'token': token
+                'token': token,
+                'type': user.type
             });
         });
     }
