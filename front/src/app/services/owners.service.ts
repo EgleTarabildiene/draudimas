@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Owner } from '../models/owner';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Owner } from '../models/owner';
 export class OwnersService {
 
   //http://localhost:4999/owners - cia yra visi savininkai
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private authService:AuthService) { }
 
 
   public getOwners(){
