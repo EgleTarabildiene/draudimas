@@ -5,10 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const authMiddleware = (req, res, next) => {
     try {
         const token = req.headers.auth;
-        jsonwebtoken_1.default.verify(token, "kk59444gsd4r9+-eyery64er94ty9wer49erh4");
+        dotenv_1.default.config();
+        if (process.env.TOKEN_SECRET != null) {
+            const user = (jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET));
+            req.user = user;
+        }
         next();
     }
     catch (error) {

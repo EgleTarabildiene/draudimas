@@ -15,6 +15,7 @@ export class AuthService {
     const user=localStorage.getItem("user");
     if (user!=null){
       this.user=JSON.parse(user);
+        console.log(this.user);
     }
   }
 
@@ -52,6 +53,7 @@ export class AuthService {
   public canViewData(){
     return this.isLoggedin();
   }
+
 
 
 }
