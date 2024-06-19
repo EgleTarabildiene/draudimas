@@ -63,6 +63,7 @@ class AuthController {
                     expiresIn: '2 days'
                 });
                 res.json({
+                    'id': user.id,
                     'name': user.name,
                     'email': user.email,
                     'token': token,

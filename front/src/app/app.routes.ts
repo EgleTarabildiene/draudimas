@@ -10,6 +10,7 @@ import { editGuard } from './guards/edit.guard';
 import { UpdateUserComponent } from './components/users/update-user/update-user.component';
 import { adminGuard } from './guards/admin.guard';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
+import { ProfileComponent } from './components/users/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -39,7 +40,10 @@ export const routes: Routes = [
         canActivate:[adminGuard]
     },
 
-
+  {
+        path:"profile",
+        component:ProfileComponent
+    },
 
     
     {path:"", component:HomePageComponent}
