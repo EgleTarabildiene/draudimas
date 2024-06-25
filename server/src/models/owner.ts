@@ -8,5 +8,7 @@ export interface Owner extends RowDataPacket{
     phone:string;
     email:string;
     address:string;
+  
+    }
+
     
-}

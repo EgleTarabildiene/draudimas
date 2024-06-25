@@ -25,8 +25,10 @@ export class AuthService {
     return this.httpClient.post("http://localhost:4999/auth/signin", user);
   }
 
-  public loginUser(user:User){
+ public loginUser(user:User){
     return this.httpClient.post<User>("http://localhost:4999/auth/login",user).pipe(tap( (response)=>{
+      console.log("Prisijungiame:");
+      console.log(response);
       this.user=response;
       localStorage.setItem("user", JSON.stringify(this.user));
       this.onLoginStatusChange.emit(true);
