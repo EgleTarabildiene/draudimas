@@ -7,6 +7,6 @@ export class Order{
         public owners?:{
             ownerId:number,
             count:number
-        }
+        }[]
     ){}
 }
